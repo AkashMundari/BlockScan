@@ -92,7 +92,7 @@ const Navbar = () => {
 
   useEffect(() => {
     // getEtherPrice();
-    // getEtherSupply();
+    //getEtherSupply();
     checkAccount();
   }, []);
 
