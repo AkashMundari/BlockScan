@@ -66,6 +66,8 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    // getEtherPrice();
+    //getEtherSupply();
     checkAccount();
     getAccountDetails();
   }, []);
