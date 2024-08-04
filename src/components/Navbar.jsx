@@ -8,6 +8,7 @@ const Navbar = () => {
   const [etherBalance, setEtherBalance] = useState(0);
   const [totalTransactions, setTotalTransactions] = useState(0);
   const [userAccount, setUserAccount] = useState("");
+  const [info, setInfo] = useState(true);
 
   const checkAccount = async () => {
     if (!window.ethereum) {
@@ -60,6 +61,10 @@ const Navbar = () => {
     }
   };
 
+  const handleInfo = () => {
+    setInfo(!info);
+  };
+
   useEffect(() => {
     checkAccount();
     getAccountDetails();
@@ -79,7 +84,7 @@ const Navbar = () => {
             {userAccount ? (
               <div>
                 {userAccount.substring(0, 10)}...
-                <div>
+                <div onClick={handleInfo}>
                   <FontAwesomeIcon icon={faCaretDown} />
                 </div>
               </div>
@@ -89,10 +94,18 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
       <div className="userInfo">
-        <p>Account : {userAccount.substring(0, 12)}...</p>
-        <p>Balance : {etherBalance}</p>
-        <p>Transactions : {totalTransactions}</p>
+        {!info ? (
+          <div>
+            {" "}
+            <p>Account : {userAccount.substring(0, 12)}...</p>
+            <p>Balance : {etherBalance}</p>
+            <p>Transactions : {totalTransactions}</p>
+          </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     </>
   );
