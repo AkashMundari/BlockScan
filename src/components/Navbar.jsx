@@ -1,51 +1,13 @@
-// import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import logo from "../images/logo.png"; // Adjust the path if necessary
-// import axios from "axios";
+import logo from "../images/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { ethers } from "ethers";
 
 const Navbar = () => {
+  const [etherBalance, setEtherBalance] = useState(0);
+  const [totalTransactions, setTotalTransactions] = useState(0);
   const [userAccount, setUserAccount] = useState("");
-  const API_ETHER_KEY = "8IFRGUXZKWGYDHNAM8HKTCW69DXMK6D2RJ";
-  const getEtherPrice = async () => {
-    try {
-      const response = await fetch(
-        `https://api.etherscan.io/api?module=stats&action=ethprice&apikey=${API_ETHER_KEY}`
-      );
-      const data = await response.json();
-      const timestamp = Number(data.result.ethusd_timestamp);
-      const date = new Date(timestamp);
-      const formatedDate = `Updated At ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-
-      if (response.ok) {
-        console.log(data.result.ethusd);
-        console.log(formatedDate);
-      } else {
-        console.error("Error fetching Ether price:", data.message);
-      }
-    } catch (error) {
-      console.error("Error fetching Ether price:", error);
-    }
-  };
-
-  const getEtherSupply = async () => {
-    try {
-      const response = await fetch(
-        `https://api.etherscan.io/api?module=stats&action=ethsupply&apikey=${API_ETHER_KEY}`
-      );
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log(data.result);
-      } else {
-        console.error("Error fetching Ether price:", data.message);
-      }
-    } catch (error) {
-      console.error("Error fetching Ether price:", error);
-    }
-  };
 
   const checkAccount = async () => {
     if (!window.ethereum) {
@@ -68,32 +30,39 @@ const Navbar = () => {
     }
   };
 
-  const connectWallet = async () => {
-    if (!window.ethereum) {
-      console.log("Connect to MetaMask");
-      return;
-    }
+  const getAccountDetails = async () => {
+    if (window.ethereum) {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-    try {
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
+      try {
+        // Request account access
+        const accounts = await provider.send("eth_requestAccounts", []);
+        const account = accounts[0];
+        setUserAccount(account);
 
-      if (accounts.length > 0) {
-        console.log(accounts[0]);
-        setUserAccount(accounts[0]);
-      } else {
-        console.log("No accounts found");
+        // Get account balance
+        const balanceWei = await provider.getBalance(account);
+        const balanceEth = ethers.utils.formatEther(balanceWei);
+        setEtherBalance(balanceEth);
+
+        console.log("Account Address:", account);
+        console.log("Balance:", balanceEth, "ETH");
+
+        // Fetch transaction count
+        const transactionCount = await provider.getTransactionCount(account);
+        console.log("Total Transactions:", transactionCount);
+        setTotalTransactions(transactionCount);
+      } catch (error) {
+        console.error("Error fetching account details:", error);
       }
-    } catch (error) {
-      console.error("Error checking account:", error);
+    } else {
+      console.error("MetaMask is not installed");
     }
   };
 
   useEffect(() => {
-    // getEtherPrice();
-    // getEtherSupply();
     checkAccount();
+    getAccountDetails();
   }, []);
 
   return (
@@ -115,10 +84,15 @@ const Navbar = () => {
                 </div>
               </div>
             ) : (
-              <button onClick={connectWallet}>Connect Wallet</button>
+              <button onClick={getAccountDetails}>Connect Wallet</button>
             )}
           </div>
         </div>
+      </div>
+      <div className="userInfo">
+        <p>Account : {userAccount.substring(0, 12)}...</p>
+        <p>Balance : {etherBalance}</p>
+        <p>Transactions : {totalTransactions}</p>
       </div>
     </>
   );

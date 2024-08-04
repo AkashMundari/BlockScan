@@ -1,11 +1,15 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family:'Courier New', Courier, monospace;
+  font-family: "Courier New", Courier, monospace;
 }
 
-.navbar{
+body {
+  background-color: #2a2a2b;
+}
+
+.navbar {
   background-color: #070707;
   height: 90px;
   color: white;
@@ -15,7 +19,7 @@
   padding: 10px 30px;
 }
 
-.nav-container{
+.nav-container {
   display: flex;
   justify-content: space-between;
   justify-items: center;
@@ -24,15 +28,15 @@
   /* background-color: yellow; */
 }
 
-.nav-left img{
+.nav-left img {
   height: 60px;
 }
 
-.nav-center{
+.nav-center {
   font-size: 40px;
 }
 
-.nav-right button{
+.nav-right button {
   background-color: #222223;
   border: 3px solid white;
   color: white;
@@ -41,10 +45,28 @@
   border-radius: 5px;
 }
 
-.nav-right div{
+.nav-right div {
   display: flex;
   /* border: 1px solid white; */
   margin-left: 10px;
   font-size: 18px;
   /* background-color: yellow; */
+}
+
+.userInfo {
+  background-color: #252424;
+  color: white;
+  width: max-content;
+  padding: 20px 10px;
+  position: fixed;
+  top: 90px;
+  right: 0;
+}
+
+.info {
+  color: white;
+  background-color: #070707;
+  border-radius: 10px;
+  width: max-content;
+  padding: 20px 10px;
 }
