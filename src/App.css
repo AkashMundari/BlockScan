@@ -70,10 +70,13 @@ align-items:end;
 
 }
 #social{
-justify-content: space-between;
-font-size: large;
+  display: flex;
+  
 }
-
+#social a{
+  font-size: 30px;
+  padding: 5px;
+}
 a{
   color: azure;
   font-family:sans-serif;

@@ -36,7 +36,7 @@ return(
       <div className="social">
         <h3>Follow Us</h3>
         <div id="social">
-        &nbsp;<a href="#" ><FaFacebook/></a><br/>
+         <a href="#" ><FaFacebook/></a><br/>
         &nbsp;<a href="#" ><FaTwitter/></a><br/>
         &nbsp;<a href="#" ><FaInstagram/></a><br/>
         &nbsp;<a href="#" ><FaGithub/></a>
