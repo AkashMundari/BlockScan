@@ -34,44 +34,44 @@ const Overview = () => {
         </div>
 
         <div className="bg-black p-4 rounded-md">
-          <div className="p-4  border-b-2 text-white grid grid-cols-2  gap-20 ">
+          <div className="p-4  border-b-2 text-white grid grid-cols-2  gap-15 ">
             <div className="flex">
               <span className="mr-3">
                 <BsCartFill size={30} className="text-white" />
               </span>
               <span>
-                <p className="flex">Total Supply</p>
+                <p className="flex">TOTAL SUPPLY</p>
                 <h1>{totalSupply} ETH</h1>
               </span>
             </div>
-            <div className="flex justify-between">
-              <span>
+            <div className="flex">
+              <span className="mr-3">
                 <FaGasPump size={30} className="text-white" />
               </span>
               <span>
                 <p className="flex">MEDIAN GAS PRICE</p>
-                <h1 className="flex justify-end">{latestGasFee} Gwei</h1>
+                <h1 className="flex">{latestGasFee} Gwei</h1>
               </span>
             </div>
           </div>
 
-          <div className="p-4 text-white grid grid-cols-2 gap-20 ">
+          <div className="p-4 text-white grid grid-cols-2 gap-15 ">
             <div className="flex">
               <span className="mr-3">
                 <ImMeter size={30} className="text-white" />
               </span>
               <span>
-                <p className="flex mb-2">LAST FINALIZED BLOCK</p>
+                <p className="flex">LAST FINALIZED BLOCK</p>
                 <h1>{latestBlock}</h1>
               </span>
             </div>
-            <div className="flex justify-between">
+            <div className="flex">
               <span className="mr-3">
                 <IoCubeOutline size={30} className="text-white" />
               </span>
               <span>
-                <p className="flex mb-2">LAST SAFE BLOCK</p>
-                <h1 className="flex justify-end">{latestBlock}</h1>
+                <p className="flex">LAST SAFE BLOCK</p>
+                <h1 className="flex">{latestBlock}</h1>
               </span>
             </div>
           </div>
