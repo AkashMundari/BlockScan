@@ -9,6 +9,8 @@ import { IoCubeOutline } from "react-icons/io5";
 const Overview = () => {
   const { valueETH, totalSupply, latestBlock, latestGasFee } =
     useContext(DataContext);
+  const ethPrice = valueETH.toLocaleString();
+  const finalizedBlock = latestBlock ? latestBlock - 6 : "";
   return (
     <>
       <div className="w-full p-14 mx-auto md:text-xl sm:text-lg text-sm grid md:grid-cols-2 gap-8 bg-[#2a2a2b]">
@@ -19,7 +21,7 @@ const Overview = () => {
             </span>
             <span>
               <p className="flex">ETHER PRICE</p>
-              <h1>$ {valueETH.toLocaleString()}</h1>
+              <h1>$ {Math.round(ethPrice * 100) / 100}</h1>
             </span>
           </div>
           <div className="p-4 text-white flex ">
@@ -62,7 +64,7 @@ const Overview = () => {
               </span>
               <span>
                 <p className="flex">LAST FINALIZED BLOCK</p>
-                <h1>{latestBlock}</h1>
+                <h1>{finalizedBlock}</h1>
               </span>
             </div>
             <div className="flex">
